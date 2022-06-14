@@ -1,0 +1,123 @@
+#label-titles-container{
+    display:flex;
+}
+
+#labels{
+    width:100px;
+    position: relative;
+    top:5px;
+}
+
+.errors{
+    color:red;
+    margin:0;
+    visibility: hidden;
+}
+
+#container{
+    width:500px;
+}
+
+#title{
+    text-align:center;
+}
+
+#graph-container{
+    display:flex;
+    height:200px;
+}
+
+#y-axis{
+    width:15%;
+    position:relative;
+}
+
+#y-axis h2{
+    position:absolute;
+    top:calc(50% - 30px);
+    right:5px;
+    transform: rotate(-90deg);
+}
+
+#graph{
+   width:90%;
+   display:flex;
+   border-left:2px black solid;
+   border-bottom:2px black solid;
+   
+}
+
+.bar{
+   background-color:red;
+   margin-left:2%;
+   position: relative;
+   height:0;
+
+}
+
+.bar-value{
+    position:absolute;
+    --width:18px;
+    width:var(--width);
+    top:-15px; 
+    left:calc(50% - calc(var(--width)/2));
+    font-weight:bold;
+}
+
+#names-container{
+   display:flex;
+   height:20px;
+}
+
+#empty-space{
+   width:15%;
+} 
+
+#names{
+    width:90%;
+    display:flex;
+}
+
+.name{
+    text-align: center;
+    margin-left:2%;
+    word-wrap: wrap;
+}
+
+#x-axis{
+   text-align:center
+}
+
+#name-value-pairs{
+   display:flex;
+   margin-top:10px;
+}
+
+.values{
+   margin-left:10px;
+}
+
+.y-value{
+   margin-top:5px;
+}
+
+#adjust{
+    text-align: center;
+}
+
+#width-adjust{
+    background-color:red;
+    width:80%; 
+    height:10px;
+    outline:none;
+    -webkit-appearance: none;
+}
+
+#width-adjust::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    border-radius: 50%;
+    height: 25px;
+    background: black;
+    cursor: pointer;
+}

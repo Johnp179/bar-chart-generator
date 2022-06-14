@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <div id = "label-titles-container">
+                <div id = "labels">
+                    <Label> Title</Label> <p></p>
+                    <Label> Y-axis</Label> <p></p>
+                    <Label> X-axis</Label> <p></p>
+                    <label >No of Entities</label>
+                </div>
+
+                <div id = "axis-titles">
+                    <input type="text" id = "graph-title"> <p class = "errors"> Please fill this out</p>
+                    <input type="text" id = "y-axis-title"> <p class = "errors">Please fill this out</p>
+                    <input type="text" id = "x-axis-title"> <p class = "errors"> Please fill this out</p>
+                    <input type="text" id = "number-of-entities"> <p class = "errors"> Max is 20</p>
+                </div>
+            </div>
+            <div id = "name-value-pairs"></div>
+
+            <button id = "generate-graph">Generate graph</button>
+        </div>
+
+        <div id = "container">
+            <div id = "title">
+                <h1>Title</h1>
+            </div>
+
+            <div id = "graph-container">
+                <div id = "y-axis">
+                    <h2>y-axis</h2>
+                </div>
+                <div id = "graph"></div>
+            </div>
+
+            <div id = "names-container">
+                <div id = "empty-space"></div>
+                <div id = "names">
+                </div>
+            </div>
+
+            <div id = "x-axis">
+                <h2>X-axis</h2>
+            </div>
+
+            <div id = "adjust">
+                <input type="range" min= "500" max = "1500" value = "500" id = "width-adjust">
+            </div>
+        </div>
+
+        <template id = "template-values">
+            <div class = "values">
+                 <input type="text" class = "x-value" ><br>
+                 <input type="text" class = "y-value">
+            </div>
+        </template>
+ 
+        <template id = "template-bar">
+             <div class = "bar">
+                 <span class = "bar-value"></span>
+             </div>
+        </template>
+ 
+        <template id = "template-name">
+             <div class = "name"></div>
+        </template>
+           
+        
+    </body>
+</html>
