@@ -1,123 +1,187 @@
-#label-titles-container{
+
+*{
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+header{
+    text-align: center;
+}
+
+input{
+    outline:none;
+    border:1px solid black;
+     
+}
+
+
+#graph-values{
+    margin: 0 auto;
+    width:190px;
+
+    input{
+        width:100%;
+    }
+
+    div{
+        margin: 10px 0px;
+    }
+
+    #add-remove{
+        text-align: center;
+
+        i{
+            border: 1px solid black;
+            padding:3px;
+        }
+
+    }
+}
+
+#xy-values-container{
     display:flex;
+    flex-wrap: wrap;
+  
+        
+    .xy-values{
+        margin:5px 5px;
+        padding:10px;
+        background-color: grey;
+        display:flex;
+        align-items: center;
+        
+        input{
+            margin-bottom:5px;
+            width:150px;
+        }
+    
+    }
+
+    #add-remove{
+        padding: 10px;
+        display:none;
+        flex-direction: column;
+        justify-content: space-between;
+               
+        i{
+            border: 1px solid black;
+            padding:3px;
+        }
+
+        i:hover{
+            color:white;
+            background-color: black;
+        }
+    }
+
+}
+    
+
+#error{
+    text-align: center;
+
+    p{
+        display: none;
+        color:red;
+        font-weight:bold;
+        font-size: 1.2em;
+        margin: 4px 0px;
+    }
 }
 
-#labels{
-    width:100px;
-    position: relative;
-    top:5px;
-}
+#generate-graph{
+    padding:15px;
+    display:none;
+    text-align: center;
 
-.errors{
-    color:red;
-    margin:0;
-    visibility: hidden;
-}
+    button{
+        padding:8px;
+        font-weight: bold;
+        border: 1px solid black;
 
-#container{
-    width:500px;
-}
+    }
 
-#title{
-    text-align:center;
+    button:hover{
+        color:white;
+        background-color: black;
+
+    }
 }
 
 #graph-container{
-    display:flex;
-    height:200px;
-}
+    display:none;
+    flex-wrap: wrap;
 
-#y-axis{
-    width:15%;
-    position:relative;
-}
+    #title{
+        width:100%;
+        text-align: center;
+    }
 
-#y-axis h2{
-    position:absolute;
-    top:calc(50% - 30px);
-    right:5px;
-    transform: rotate(-90deg);
-}
+    #y-axis{
+        width:15%;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
 
-#graph{
-   width:90%;
-   display:flex;
-   border-left:2px black solid;
-   border-bottom:2px black solid;
-   
-}
+        div{
+            text-align: center;
 
-.bar{
-   background-color:red;
-   margin-left:2%;
-   position: relative;
-   height:0;
+            h2{
+          
+                right:5px;
+                transform: rotate(-90deg);
+            }
+        }
 
-}
 
-.bar-value{
-    position:absolute;
-    --width:18px;
-    width:var(--width);
-    top:-15px; 
-    left:calc(50% - calc(var(--width)/2));
-    font-weight:bold;
-}
+    }
 
-#names-container{
-   display:flex;
-   height:20px;
-}
+    #graph{
+        width:85%;
+        border:5px solid black;
+        border-right:none;
+        border-top:none;
+        height:200px;
+        display:flex;
+        justify-content: space-around;
+        align-items:flex-end;
+        
+        .bar{
+            position: relative;
+            background-color: green;
+            display:flex;
+            justify-content: center;
+        }
 
-#empty-space{
-   width:15%;
-} 
+        .bar-value{
+            position: relative;
+            bottom:15px;
 
-#names{
-    width:90%;
-    display:flex;
-}
+        }
 
-.name{
-    text-align: center;
-    margin-left:2%;
-    word-wrap: wrap;
-}
+    }
 
-#x-axis{
-   text-align:center
-}
+    #x-axis{
+        width:100%;
 
-#name-value-pairs{
-   display:flex;
-   margin-top:10px;
-}
+        #x-components{
+            position:relative;
+            left: 15%;
+            display:flex;
+            justify-content: space-around;
+            width:85%;
 
-.values{
-   margin-left:10px;
-}
+            .x-component{
+                width:50px;
+                text-align: center;
+            }
+        }
 
-.y-value{
-   margin-top:5px;
-}
+        #x-axis-name{
+            text-align: center;
+        }
 
-#adjust{
-    text-align: center;
-}
+    }
 
-#width-adjust{
-    background-color:red;
-    width:80%; 
-    height:10px;
-    outline:none;
-    -webkit-appearance: none;
-}
-
-#width-adjust::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 15px;
-    border-radius: 50%;
-    height: 25px;
-    background: black;
-    cursor: pointer;
 }

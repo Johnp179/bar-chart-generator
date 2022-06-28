@@ -13,16 +13,4 @@ module.exports = merge(base,{
       }),
       
    ],
-
-    optimization: {
-        minimizer: [
-          new TerserPlugin({
-            terserOptions: {
-              output: {
-                comments: false
-              }
-            }
-          })
-        ]
-      }
 })

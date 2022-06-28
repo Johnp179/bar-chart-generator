@@ -1,75 +1,118 @@
 <html>
     <head>
+        
         <title><%= htmlWebpackPlugin.options.title %></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/e2e91b9ed8.js" crossorigin="anonymous"></script>
+
     </head>
     <body>
-        <div>
-            <div id = "label-titles-container">
-                <div id = "labels">
-                    <Label> Title</Label> <p></p>
-                    <Label> Y-axis</Label> <p></p>
-                    <Label> X-axis</Label> <p></p>
-                    <label >No of Entities</label>
-                </div>
 
-                <div id = "axis-titles">
-                    <input type="text" id = "graph-title"> <p class = "errors"> Please fill this out</p>
-                    <input type="text" id = "y-axis-title"> <p class = "errors">Please fill this out</p>
-                    <input type="text" id = "x-axis-title"> <p class = "errors"> Please fill this out</p>
-                    <input type="text" id = "number-of-entities"> <p class = "errors"> Max is 20</p>
-                </div>
+        <header>
+            <h1>Bar-chart Generator</h1>
+        </header>
+
+        <div id = "graph-values">
+
+            <div>
+                <label>Title</label> <br>
+                <input type="text" id = "graph-title"> 
+              
             </div>
-            <div id = "name-value-pairs"></div>
 
-            <button id = "generate-graph">Generate graph</button>
+            <div>
+                <label>Y-axis<label> <br>
+                <input type="text"  id = "y-axis-title"> 
+            </div>
+
+            <div>
+                <label>X-axis</label> <br>
+                <input type="text"  id = "x-axis-title"> 
+            </div>
+
+            <div>
+                <label>Number of Entities</label> <br>
+                <input type="text" id = "number-of-entities" class = "gf"> 
+            </div>
+
         </div>
 
-        <div id = "container">
+
+        <div id = "xy-values-container">
+
+            <div id = "add-remove">
+                <div id = "add">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+        
+                <div id = "remove">
+                    <i class="fa-solid fa-minus"></i>
+                </div>
+            </div> 
+
+        </div>
+
+        <div id = "error">
+            <p>Please fill out all availible fields!</p>
+            <p>The maximum number of entities is 20!</p>
+            <p>Y-values must be numeric!</p>
+        </div>
+
+        <div id = "generate-graph">
+             <button > Generate Graph</button>
+        </div>
+
+        <div  id = "graph-container">
             <div id = "title">
                 <h1>Title</h1>
             </div>
 
-            <div id = "graph-container">
-                <div id = "y-axis">
-                    <h2>y-axis</h2>
+            <div id = "y-axis">
+                <div>
+                    <h2>Y-axis</h1>
                 </div>
-                <div id = "graph"></div>
             </div>
 
-            <div id = "names-container">
-                <div id = "empty-space"></div>
-                <div id = "names">
-                </div>
-            </div>
+            <div id = "graph"></div>
 
             <div id = "x-axis">
-                <h2>X-axis</h2>
+
+                <div id = "x-components"></div>
+
+                <div id = "x-axis-name">
+                    <h2>X-axis</h1>
+                </div>
             </div>
 
-            <div id = "adjust">
-                <input type="range" min= "500" max = "1500" value = "500" id = "width-adjust">
-            </div>
+
         </div>
 
-        <template id = "template-values">
-            <div class = "values">
-                 <input type="text" class = "x-value" ><br>
-                 <input type="text" class = "y-value">
+        <template id = "template-xy-values">
+
+            <div class = "xy-values">
+                <div>
+                    <input type="text" placeholder = "X-value" class = "x-value" ><br>
+                    <input type="text" placeholder = "Y-value" class = "y-value">
+                </div>
             </div>
+
         </template>
- 
+        
         <template id = "template-bar">
+
              <div class = "bar">
                  <span class = "bar-value"></span>
              </div>
+
         </template>
  
-        <template id = "template-name">
-             <div class = "name"></div>
+        <template id = "template-x-component">
+            
+             <div class = "x-component"></div>
+
         </template>
-           
+    
         
     </body>
 </html>
