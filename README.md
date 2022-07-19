@@ -1,5 +1,5 @@
 # Pre-requisites:
-1. Node.
+1. Node and npm. v16.16.0 and v8.11.0 respectively are used in this project.
 
 # To execute program:
 
