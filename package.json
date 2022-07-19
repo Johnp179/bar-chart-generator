@@ -5,20 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node index.js",
+    "start": "node index.js",
+    "build": "npm run buld --prefix public",
     "dev": "npm start --prefix public",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix public && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/searai/bar-chart-generator.git"
+    "url": "git+https://github.com/Johnp179/bar-chart-generator.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/searai/bar-chart-generator/issues"
+    "url": "https://github.com/Johnp179/bar-chart-generator/issues"
   },
-  "homepage": "https://github.com/searai/bar-chart-generator#readme",
+  "homepage": "https://github.com/Johnp179/bar-chart-generator#readme",
   "dependencies": {
     "express": "^4.18.1"
   }
