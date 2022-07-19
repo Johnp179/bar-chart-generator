@@ -1,160 +1,200 @@
 import "./index.scss";
 
-const numberOfEntries = document.querySelector("#number-of-entities");
-const templateValues = document.querySelector("#template-xy-values");
+const numberOfEntities = document.querySelector("#number-of-entities");
+const templateXYValues = document.querySelector("#template-xy-values");
 const xyValuesContainer = document.querySelector("#xy-values-container")
 const addRemove = document.querySelector("#add-remove");
-const errors = document.querySelectorAll("#error p")
-const maxNumberOfEntries = 20;
+const generateGraph = document.querySelector("#generate-graph");
+const maxNumberOfEntities = 20;
+let amountOfEntities
 
+for(let i = 0; i < maxNumberOfEntities; i++){
+    let xyValue = templateXYValues.content.cloneNode(true);
+    xyValuesContainer.insertBefore(xyValue, addRemove);
+}
 
-numberOfEntries.addEventListener("input",function(){
+const xyValues = document.querySelectorAll(".xy-values");
+const errors = document.querySelectorAll(".errors");
 
-    errors[0].style.display = "none";
-    document.querySelector("#generate-graph").style.display = "none";
-    addRemove.style.display = "none";
+numberOfEntities.addEventListener("input", function(){
+
+    generateGraph.style.display = "none";
 
     if(this.value <= 0 || isNaN(this.value)) return xyValuesContainer.style.display = "none";
-    
-    if(this.value > maxNumberOfEntries) return errors[1].style.display = "block";
-    
-    errors[1].style.display = "none";
-    document.querySelector("#generate-graph").style.display = "block";
+    if(this.value > maxNumberOfEntities){
+        xyValuesContainer.style.display = "none";
+        errors[3].style.visibility = "visible";
+        this.style.boxShadow = "0 0 10px red";
+        return
+    } 
+
+    errors[errors.length -1].style.display = "none";
+    this.style.boxShadow = "none";
+    errors[3].style.visibility = "hidden";
+    generateGraph.style.display = "block";
     addRemove.style.display = "flex";
     xyValuesContainer.style.display = "flex";
+    amountOfEntities = this.value;
 
-    while(xyValuesContainer.children.length > 1){
-        let firstChild = xyValuesContainer.firstElementChild;
-        xyValuesContainer.removeChild(firstChild);
+    for(let i = 0; i < this.value; i ++){
+        xyValues[i].style.display = "block";
     }
 
-    for(let i = 0; i < this.value; i++){
-        let xyValue = templateValues.content.cloneNode(true);
-        xyValuesContainer.insertBefore(xyValue, addRemove);
-        
+    for(let i = this.value; i < maxNumberOfEntities; i ++){
+        let xValue = xyValues[i].querySelector(".x-value");
+        let yValue = xyValues[i].querySelector(".y-value");
+        let xError = xyValues[i].querySelectorAll(".errors")[0];
+        let yError = xyValues[i].querySelectorAll(".errors")[1];
+        xyValues[i].style.display = "none";
+        xError.style.visibility =  "hidden";
+        yError.style.visibility =  "hidden";
+        xValue.style.boxShadow = "none";
+        yValue.style.boxShadow = "none";
+        xValue.value = "";
+        yValue.value = "";
     }
+  
 
 })
 
 document.querySelector("#remove").addEventListener("click",()=>{
+    
+    amountOfEntities --;
+    const xyValueToRemove = xyValues[amountOfEntities];
+    const xValue = xyValueToRemove.querySelector(".x-value");
+    const yValue = xyValueToRemove.querySelector(".y-value");
+    const xError = xyValueToRemove.querySelectorAll(".errors")[0];
+    const yError = xyValueToRemove.querySelectorAll(".errors")[1];
+    errors[errors.length -1].style.display = "none";
+    xyValueToRemove.style.display = "none";
+    xError.style.visibility =  "hidden";
+    yError.style.visibility =  "hidden";
+    xValue.style.boxShadow = "none";
+    yValue.style.boxShadow = "none";
+    xValue.value = "";
+    yValue.value = "";
 
-    errors[1].style.display = "none";
-
-    if(xyValuesContainer.children.length > 2){
-        const childToRemove = addRemove.previousElementSibling;
-        xyValuesContainer.removeChild(childToRemove);
-    }else{
-        const childToRemove = addRemove.previousElementSibling;
-        xyValuesContainer.removeChild(childToRemove);
+    if(amountOfEntities == 0){
         addRemove.style.display = "none";
-    }
+        generateGraph.style.display = "none";
 
-   
+    } 
+
 });
 
 document.querySelector("#add").addEventListener("click", ()=>{
 
-    const currentNumberOfEntries = xyValuesContainer.children.length - 1;
-    if(currentNumberOfEntries < maxNumberOfEntries){
-        const xyValue = templateValues.content.cloneNode(true);
-        xyValuesContainer.insertBefore(xyValue, addRemove)
+    if(amountOfEntities < maxNumberOfEntities){
+        xyValues[amountOfEntities].style.display = "block";
+        amountOfEntities ++;
     }else{
-        errors[1].style.display = "block";
+        errors[errors.length -1].style.display = "block";
     }
    
 });
+
+
+const inputs = Array.from(document.querySelectorAll("input"));
+
+inputs.forEach((element, index)=>{
+    // index 3 corresponds to the numberOfEntities so can be skipped
+    if(index == 3) return;
+
+    //index 0, 1 and 2 correspond to title, y-axis and x-axis respetively; only need to
+    //check if they are empty or not which is the same check as for the x-values. The listener is 
+    //as follows
+    if(index == 0 || index == 1 || index == 2 || element.className == "x-value"){
+        element.addEventListener("input", ()=>{
+            if(!element.value){
+                element.style.boxShadow = "0 0 10px red";
+                errors[index].style.visibility = "visible";
+            }else{
+                element.style.boxShadow = "none";
+                errors[index].style.visibility = "hidden";
+            }
+        })
+        return;
+    }
+
+    // elements left are y-values, the listener is as follows
+    element.addEventListener("input", ()=>{
+        if(!element.value || isNaN(element.value)){
+            element.style.boxShadow = "0 0 10px red";
+            errors[index].style.visibility = "visible";
+        }else{
+            element.style.boxShadow = "none";
+            errors[index].style.visibility = "hidden";
+        }
+    
+    })
+
+
+})
 
 
 
 document.querySelector("#generate-graph button").addEventListener("click", generate);
 
 function generate(){
+
+    document.querySelector("#graph").innerHTML = "";
+    document.querySelector("#x-components").innerHTML = "";
+    document.querySelector("#graph-container").style.display = "none";
+
     let error = {
         emptyFields: false,
         invalidYValue: false
-    }
+    };
 
-    const inputs = document.querySelectorAll("input");
-    const yValues = Array.from(document.querySelectorAll(".y-value")); //Array.from is necessary for the reduce method to work.
+    // only need to check inputs which are displayed in the DOM. This is the first 4(title, y-axis, x-axis and No of entities) plus
+    // the xy-values, the amount of which is equal to amountOfEntities *2.
+    const inputsToCheck = inputs.slice(0, 4 + amountOfEntities*2);
+    const xyInputsToCheck = inputsToCheck.slice(4);
 
-    inputs.forEach(element=>{
+    inputsToCheck.forEach((element, index) => {
+        // index 3 corresponds to the number of entities so can be skipped
+        if(index == 3) return;
 
-        if(!element.value){
-            element.style.boxShadow = "0 0 10px red";
-            error.emptyFields = true;
-        }
+        //index 0, 1 and 2 correspond to title, y-axis and x-axis respetively; only need to
+        //check if they are empty or not which is the same check as for the x-values
 
-        if(element.className == "y-value"){
-            if(!element.value || isNaN(element.value)){
+        if(index == 0 || index == 1 || index == 2 || element.className == "x-value"){
+            if(!element.value){
                 element.style.boxShadow = "0 0 10px red";
-                error.invalidYValue = true;
+                error.emptyFields = true;
+                errors[index].style.visibility = "visible";
             }
+            return;
         }
+        // elements left are y-values, the check is as follows:
+        if(!element.value || isNaN(element.value)){
+            element.style.boxShadow = "0 0 10px red";
+            error.invalidYValue = true;
+            errors[index].style.visibility = "visible";
+        }
+        
    
-        element.addEventListener("input",()=>{
-
-            if(element.className != "y-value"){
-                if(element.value){
-                    element.style.boxShadow = "none";
-                }else{
-                    element.style.boxShadow = "0 0 10px red";
-                }
-            }
-
-            if(element.className == "y-value"){
-                if(element.value && !isNaN(element.value)){
-                    element.style.boxShadow = "none";
-                }else{
-                    element.style.boxShadow = "0 0 10px red";
-                }
-            }
-
-            let error = {
-                emptyFields: false,
-                invalidYValue: false
-            }
-
-            for(let i = 0; i < inputs.length; i++){
-                if(!inputs[i].value){
-                    error.emptyFields  = true;
-                    break;
-                }
-            }
-
-            for(let i = 0; i < yValues.length; i++){
-                if(!yValues[i].value || isNaN(yValues[i].value)){
-                    error.invalidYValue = true;
-                    break;
-                }
-            }
-
-            error.emptyFields ? errors[0].style.display = "block" :  errors[0].style.display = "none";
-            error.invalidYValue ? errors[2].style.display = "block" : errors[2].style.display = "none";
-  
-        })
     })
 
-    if(error.emptyFields) errors[0].style.display = "block";
-    if(error.invalidYValue) errors[2].style.display = "block";
     if(error.emptyFields || error.invalidYValue) return;
 
     const graphTitle = document.querySelector("#graph-title");
     const xAxisTitle = document.querySelector("#x-axis-title");
     const yAxisTitle = document.querySelector("#y-axis-title");
-    const graph = document.querySelector("#graph");
     const templateBar = document.querySelector("#template-bar");
+    const xInputs = xyInputsToCheck.filter(element => element.className == "x-value");
+    const yInputs = xyInputsToCheck.filter(element => element.className == "y-value");
     
     document.querySelector("#graph-container").style.display = "flex"; 
     document.querySelector("#title h1").textContent = graphTitle.value;
     document.querySelector("#x-axis-name h2").textContent = xAxisTitle.value;
     document.querySelector("#y-axis h2").textContent = yAxisTitle.value;
-    graph.innerHTML = "";
-    const maxYValue = yValues.reduce((max, element) => Math.max(max, element.value), 0);
-    const numberOfBars = document.querySelectorAll(".xy-values").length;
+    const maxYValue = yInputs.reduce((max, element) => Math.max(max, element.value), 0);
+    const numberOfBars = amountOfEntities;
     const totalWidthOfBars = 80; // leaving extra 20% for gaps
     const barWidth = (totalWidthOfBars / numberOfBars).toFixed(2) + "%";
 
-    yValues.forEach(element => {
+    yInputs.forEach(element => {
         const barHeight = (element.value / maxYValue * 100).toFixed(2) + "%";
         const barNode = templateBar.content.cloneNode(true);
         const bar = barNode.querySelector(".bar");
@@ -166,12 +206,10 @@ function generate(){
 
     })
 
-    const xValues = document.querySelectorAll(".x-value");
     const templateXComponent = document.querySelector("#template-x-component");
     const xComponents = document.querySelector("#x-components");
-    xComponents.innerHTML = "";
 
-    xValues.forEach(element => {
+    xInputs.forEach(element => {
         const xComponentNode = templateXComponent.content.cloneNode(true);
         const xComponent = xComponentNode.querySelector(".x-component");
         xComponent.textContent = element.value;
