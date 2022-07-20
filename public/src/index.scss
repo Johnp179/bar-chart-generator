@@ -44,14 +44,13 @@ input:focus{
         margin: 10px 0px;
     }
 
-    #add-remove{
-        text-align: center;
+    #number-of-entities-error{
+        margin-top:0px;
+        visibility: visible;
 
-        i{
-            border: 1px solid black;
-            padding:3px;
+        label{
+            display: none;
         }
-
     }
 }
 
@@ -74,7 +73,7 @@ input:focus{
 
     #add-remove{
         display:none;
-        height:90px;
+        height:103px;
         padding: 10px;
         flex-direction: column;
         justify-content: space-between;

@@ -15,22 +15,32 @@ for(let i = 0; i < maxNumberOfEntities; i++){
 
 const xyValues = document.querySelectorAll(".xy-values");
 const errors = document.querySelectorAll(".errors");
+const numberOfEntitiesErrors = document.querySelectorAll("#number-of-entities-error label");
 
 numberOfEntities.addEventListener("input", function(){
 
     generateGraph.style.display = "none";
+    xyValuesContainer.style.display = "none";
+    document.querySelector("#graph-container").style.display = "none";
 
-    if(this.value <= 0 || isNaN(this.value)) return xyValuesContainer.style.display = "none";
+    if(this.value == "") return;
+
+    if(this.value < 0 || isNaN(this.value)){
+        numberOfEntitiesErrors[1].style.display = "block";
+        this.style.boxShadow = "0 0 10px red";
+        return;
+    } 
     if(this.value > maxNumberOfEntities){
         xyValuesContainer.style.display = "none";
-        errors[3].style.visibility = "visible";
+        numberOfEntitiesErrors[0].style.display = "block";
         this.style.boxShadow = "0 0 10px red";
         return
     } 
 
     errors[errors.length -1].style.display = "none";
     this.style.boxShadow = "none";
-    errors[3].style.visibility = "hidden";
+    numberOfEntitiesErrors[0].style.display = "none";
+    numberOfEntitiesErrors[1].style.display = "none";
     generateGraph.style.display = "block";
     addRemove.style.display = "flex";
     xyValuesContainer.style.display = "flex";
@@ -58,6 +68,8 @@ numberOfEntities.addEventListener("input", function(){
 })
 
 document.querySelector("#remove").addEventListener("click",()=>{
+
+    if(amountOfEntities == 0) return;
     
     amountOfEntities --;
     const xyValueToRemove = xyValues[amountOfEntities];
@@ -72,13 +84,7 @@ document.querySelector("#remove").addEventListener("click",()=>{
     xValue.style.boxShadow = "none";
     yValue.style.boxShadow = "none";
     xValue.value = "";
-    yValue.value = "";
-
-    if(amountOfEntities == 0){
-        addRemove.style.display = "none";
-        generateGraph.style.display = "none";
-
-    } 
+    yValue.value = ""; 
 
 });
 

@@ -38,7 +38,11 @@
             <div>
                 <label>Number of Entities</label> 
                 <input type="text" id = "number-of-entities"> 
-                <label class = "errors">The max is 20!</label>
+                <div class = "errors" id = "number-of-entities-error">
+                    <label >The max is 20</label> 
+                    <label >Must be a positive number</label>
+                </div>
+                
             </div>
 
         </div>
@@ -59,7 +63,7 @@
         </div>
 
         
-        <p class = "errors final-error">The maximum number of entities is 20!</p>
+        <p class = "errors final-error">The maximum number of entities is 20</p>
         
 
         <div id = "generate-graph">
