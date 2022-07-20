@@ -146,6 +146,7 @@ function generate(){
     document.querySelector("#graph").innerHTML = "";
     document.querySelector("#x-components").innerHTML = "";
     document.querySelector("#graph-container").style.display = "none";
+    errors[errors.length -1].style.display = "none";
 
     let error = {
         emptyFields: false,
