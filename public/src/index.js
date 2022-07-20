@@ -23,7 +23,11 @@ numberOfEntities.addEventListener("input", function(){
     xyValuesContainer.style.display = "none";
     document.querySelector("#graph-container").style.display = "none";
 
-    if(this.value == "") return;
+    if(this.value == ""){
+        numberOfEntitiesErrors[2].style.display = "block";
+        this.style.boxShadow = "0 0 10px red";
+        return;
+    } 
 
     if(this.value < 0 || isNaN(this.value)){
         numberOfEntitiesErrors[1].style.display = "block";
@@ -41,6 +45,7 @@ numberOfEntities.addEventListener("input", function(){
     this.style.boxShadow = "none";
     numberOfEntitiesErrors[0].style.display = "none";
     numberOfEntitiesErrors[1].style.display = "none";
+    numberOfEntitiesErrors[2].style.display = "none";
     generateGraph.style.display = "block";
     addRemove.style.display = "flex";
     xyValuesContainer.style.display = "flex";
