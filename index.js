@@ -13,12 +13,12 @@ if(process.env.NODE_ENV != "production"){
   })
 }
 
-if(process.env.NODE_ENV == "production"){
-    server.use(express.static("public/dist"))
-    server.get("*",(req, res)=>{
+
+server.use("/", express.static("public/dist"))
+server.get("*",(req, res)=>{
       res.sendFile(path.join(__dirname, "public", "dist", "index.html"))
-    })  
-}
+})  
+
 
 const port = process.env.PORT || 3000
 server.listen(port,()=>{

@@ -1,13 +1,15 @@
 {
   "name": "bar-chart-generator",
   "version": "1.0.0",
-  "description": "1. Node and npm. v16.16.0 and v8.11.0 respectively are used in this project.",
+  "description": "An app which generates bar-charts",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix public",
     "build": "npm run build --prefix public",
-    "dev": "npm start --prefix public",
+    "dev": "concurrently -r -k \"npm run server\" \" npm start --prefix public \" ",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix public && npm run build"
   },
   "repository": {
@@ -22,5 +24,8 @@
   "homepage": "https://github.com/Johnp179/bar-chart-generator#readme",
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

@@ -1,22 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root{
+    --Fmin:16px;
+    --deltaF:calc(20 - 16);
+    --Smin:365px;
+    --deltaS:calc(1920 - 365);
+    font-size:calc(var(--Fmin) + var(--deltaF) * (100vw - var(--Smin)) / var(--deltaS));
+}
 
 *{
+    margin:0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Open Sans', sans-serif;
 
+}
+
+body{
+    background-color:rgb(185, 176, 176);
 }
 
 header{
     text-align: center;
+    margin-top:1em;
+}
+
+input, label{
+    display:block;
 }
 
 input{
     border:1px solid black;
-     
+    padding:0.2em;
+    border-radius: 0.4em;    
 }
 
 input:focus{
-    outline: #4c5baf solid 1px;
+    outline: none;
 }
+
+
+input.green-outline:focus{
+    box-shadow:0 0 10px green !important;
+ 
+}
+
+
+
 
 .errors{
     color:red;
@@ -34,19 +63,25 @@ input:focus{
 
 #graph-values{
     margin: 0 auto;
-    width:190px;
+    width:10em;
+
+    .headings{
+        font-weight: bold;
+        font-size: 0.9em;
+    }
 
     input{
         width:100%;
+        font-size: 0.8em;
     }
 
     div{
-        margin: 10px 0px;
+        margin: 0.7em 0;
     }
 
     #number-of-entities-error{
-        margin-top:0px;
         visibility: visible;
+        margin-top: 0;
 
         label{
             display: none;
@@ -54,54 +89,53 @@ input:focus{
     }
 }
 
+
+
 #xy-values-container{
     display:flex;
     flex-wrap: wrap;
+    justify-content:center;
+    font-size:1.5rem;
         
     .xy-values{
-        margin:5px 5px;
-        padding: 15px 10px 0px 10px;
-        background-color: grey;
+        border-radius: 0.4em;
+        margin:0.5em;
+        padding:0.5em 0.5em 0 0.5em;
+        background-color: rgb(43, 42, 42);
         display:none;
-        
+
         input{
-            margin-bottom:5px;
-            width:150px;
-        }
-    
-    }
+            font-size:0.5em;
+            width:12em;
 
-    #add-remove{
-        display:none;
-        height:103px;
-        padding: 10px;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: 5px 0px;
-               
-        i{
-            border: 1px solid black;
-            padding:3px;
         }
 
-        i:hover{
-            color:white;
-            background-color: black;
+
+        input:nth-child(3){
+            margin-top:1em;
         }
+
+        .errors{
+            font-size:0.5em;
+            font-weight: bold;
+        }
+        
     }
 
 }
     
 
 #generate-graph{
-    padding:15px;
+    margin:1em;
     display:none;
     text-align: center;
 
     button{
-        padding:8px;
+        padding:1em;
         font-weight: bold;
         border: 1px solid black;
+        border-radius: 0.4em;
+        font-size: 0.8em;
 
     }
 
@@ -119,20 +153,19 @@ input:focus{
     #title{
         width:100%;
         text-align: center;
+        margin-bottom:1em;
     }
 
     #y-axis{
-        width:15%;
+        width:10%;
         display:flex;
-        flex-direction: column;
         justify-content: center;
+        align-items: center;
 
         div{
             text-align: center;
 
             h2{
-          
-                right:5px;
                 transform: rotate(-90deg);
             }
         }
@@ -141,7 +174,7 @@ input:focus{
     }
 
     #graph{
-        width:85%;
+        width:90%;
         border:5px solid black;
         border-right:none;
         border-top:none;
@@ -152,14 +185,13 @@ input:focus{
         
         .bar{
             position: relative;
-            background-color: green;
-            display:flex;
-            justify-content: center;
+            background-color: rgb(27, 179, 27);
+            text-align: center;
         }
 
         .bar-value{
             position: relative;
-            bottom:15px;
+            bottom:1.1em;
 
         }
 
@@ -170,10 +202,10 @@ input:focus{
 
         #x-components{
             position:relative;
-            left: 15%;
+            left: 10%;
             display:flex;
             justify-content: space-around;
-            width:85%;
+            width:90%;
 
             .x-component{
                 text-align: center;

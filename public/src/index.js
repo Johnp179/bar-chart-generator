@@ -23,31 +23,37 @@ numberOfEntities.addEventListener("input", function(){
     xyValuesContainer.style.display = "none";
     document.querySelector("#graph-container").style.display = "none";
 
-    if(this.value == ""){
+    if(this.value === ""){
         numberOfEntitiesErrors[2].style.display = "block";
+        numberOfEntitiesErrors[1].style.display = "none";
         this.style.boxShadow = "0 0 10px red";
+        this.classList.remove("green-outline");
         return;
     } 
 
     if(this.value < 0 || isNaN(this.value)){
         numberOfEntitiesErrors[1].style.display = "block";
+        numberOfEntitiesErrors[2].style.display = "none";
         this.style.boxShadow = "0 0 10px red";
+        this.classList.remove("green-outline");
         return;
     } 
     if(this.value > maxNumberOfEntities){
         xyValuesContainer.style.display = "none";
         numberOfEntitiesErrors[0].style.display = "block";
         this.style.boxShadow = "0 0 10px red";
+        this.classList.remove("green-outline");
         return
     } 
 
-    errors[errors.length -1].style.display = "none";
+    // errors[errors.length -1].style.display = "none";
     this.style.boxShadow = "none";
+    this.classList.add("green-outline");
     numberOfEntitiesErrors[0].style.display = "none";
     numberOfEntitiesErrors[1].style.display = "none";
     numberOfEntitiesErrors[2].style.display = "none";
     generateGraph.style.display = "block";
-    addRemove.style.display = "flex";
+    // addRemove.style.display = "flex";
     xyValuesContainer.style.display = "flex";
     amountOfEntities = this.value;
 
@@ -65,62 +71,65 @@ numberOfEntities.addEventListener("input", function(){
         yError.style.visibility =  "hidden";
         xValue.style.boxShadow = "none";
         yValue.style.boxShadow = "none";
-        xValue.value = "";
-        yValue.value = "";
+        // xValue.value = "";
+        // yValue.value = "";
     }
   
 
 })
 
-document.querySelector("#remove").addEventListener("click",()=>{
+// document.querySelector("#remove").addEventListener("click",()=>{
 
-    if(amountOfEntities == 0) return;
+//     if(amountOfEntities === 0) return;
     
-    amountOfEntities --;
-    const xyValueToRemove = xyValues[amountOfEntities];
-    const xValue = xyValueToRemove.querySelector(".x-value");
-    const yValue = xyValueToRemove.querySelector(".y-value");
-    const xError = xyValueToRemove.querySelectorAll(".errors")[0];
-    const yError = xyValueToRemove.querySelectorAll(".errors")[1];
-    errors[errors.length -1].style.display = "none";
-    xyValueToRemove.style.display = "none";
-    xError.style.visibility =  "hidden";
-    yError.style.visibility =  "hidden";
-    xValue.style.boxShadow = "none";
-    yValue.style.boxShadow = "none";
-    xValue.value = "";
-    yValue.value = ""; 
+//     amountOfEntities --;
+//     const xyValueToRemove = xyValues[amountOfEntities];
+//     const xValue = xyValueToRemove.querySelector(".x-value");
+//     const yValue = xyValueToRemove.querySelector(".y-value");
+//     const xError = xyValueToRemove.querySelectorAll(".errors")[0];
+//     const yError = xyValueToRemove.querySelectorAll(".errors")[1];
 
-});
+//     errors[errors.length -1].style.display = "none";
+//     xyValueToRemove.style.display = "none";
+//     xError.style.visibility =  "hidden";
+//     yError.style.visibility =  "hidden";
+//     xValue.style.boxShadow = "none";
+//     yValue.style.boxShadow = "none";
+//     xValue.value = "";
+//     yValue.value = ""; 
 
-document.querySelector("#add").addEventListener("click", ()=>{
+// });
 
-    if(amountOfEntities < maxNumberOfEntities){
-        xyValues[amountOfEntities].style.display = "block";
-        amountOfEntities ++;
-    }else{
-        errors[errors.length -1].style.display = "block";
-    }
+// document.querySelector("#add").addEventListener("click", ()=>{
+
+//     if(amountOfEntities < maxNumberOfEntities){
+//         xyValues[amountOfEntities].style.display = "block";
+//         amountOfEntities ++;
+//     }else{
+//         errors[errors.length -1].style.display = "block";
+//     }
    
-});
+// });
 
 
 const inputs = Array.from(document.querySelectorAll("input"));
 
 inputs.forEach((element, index)=>{
     // index 3 corresponds to the numberOfEntities so can be skipped
-    if(index == 3) return;
+    if(index === 3) return;
 
-    //index 0, 1 and 2 correspond to title, y-axis and x-axis respetively; only need to
+    //index 0, 1 and 2 correspond to title, y-axis and x-axis respectively; only need to
     //check if they are empty or not which is the same check as for the x-values. The listener is 
     //as follows
-    if(index == 0 || index == 1 || index == 2 || element.className == "x-value"){
+    if(index === 0 || index === 1 || index === 2 || element.className.includes("x-value")){
         element.addEventListener("input", ()=>{
             if(!element.value){
                 element.style.boxShadow = "0 0 10px red";
                 errors[index].style.visibility = "visible";
+                element.classList.remove("green-outline");
             }else{
                 element.style.boxShadow = "none";
+                element.classList.add("green-outline");
                 errors[index].style.visibility = "hidden";
             }
         })
@@ -129,11 +138,13 @@ inputs.forEach((element, index)=>{
 
     // elements left are y-values, the listener is as follows
     element.addEventListener("input", ()=>{
-        if(!element.value || isNaN(element.value)){
+        if(!element.value || element.value < 0 || isNaN(element.value)){
             element.style.boxShadow = "0 0 10px red";
             errors[index].style.visibility = "visible";
+            element.classList.remove("green-outline");
         }else{
             element.style.boxShadow = "none";
+            element.classList.add("green-outline");
             errors[index].style.visibility = "hidden";
         }
     
@@ -167,10 +178,10 @@ function generate(){
         // index 3 corresponds to the number of entities so can be skipped
         if(index == 3) return;
 
-        //index 0, 1 and 2 correspond to title, y-axis and x-axis respetively; only need to
+        //index 0, 1 and 2 correspond to title, y-axis and x-axis respectively; only need to
         //check if they are empty or not which is the same check as for the x-values
 
-        if(index == 0 || index == 1 || index == 2 || element.className == "x-value"){
+        if(index == 0 || index == 1 || index == 2 || element.className.includes("x-value")){
             if(!element.value){
                 element.style.boxShadow = "0 0 10px red";
                 error.emptyFields = true;
@@ -179,7 +190,7 @@ function generate(){
             return;
         }
         // elements left are y-values, the check is as follows:
-        if(!element.value || isNaN(element.value)){
+        if(!element.value || element.value < 0 || isNaN(element.value)){
             element.style.boxShadow = "0 0 10px red";
             error.invalidYValue = true;
             errors[index].style.visibility = "visible";
@@ -194,8 +205,8 @@ function generate(){
     const xAxisTitle = document.querySelector("#x-axis-title");
     const yAxisTitle = document.querySelector("#y-axis-title");
     const templateBar = document.querySelector("#template-bar");
-    const xInputs = xyInputsToCheck.filter(element => element.className == "x-value");
-    const yInputs = xyInputsToCheck.filter(element => element.className == "y-value");
+    const xInputs = xyInputsToCheck.filter(element => element.className.includes("x-value"));
+    const yInputs = xyInputsToCheck.filter(element => element.className.includes("y-value"));
     
     document.querySelector("#graph-container").style.display = "flex"; 
     document.querySelector("#title h1").textContent = graphTitle.value;

@@ -17,27 +17,28 @@
         <div id = "graph-values">
 
             <div>
-                <label>Title</label> 
-                <input type="text" id = "graph-title">
+                <label class="headings" >Title</label> 
+                <input type="text" id = "graph-title" class="green-outline" >
                 <label class = "errors">Please fill out</label> 
               
             </div>
 
             <div>
-                <label>Y-axis<label> 
-                <input type="text"  id = "y-axis-title">
+                <label class="headings" >Y-axis</label> 
+                <input type="text" id = "y-axis-title"  class="green-outline" >
                 <label class = "errors">Please fill out</label> 
             </div>
 
             <div>
-                <label>X-axis</label> 
-                <input type="text"  id = "x-axis-title"> 
+                <label class="headings" >X-axis</label> 
+                <input type="text"  id = "x-axis-title"  class="green-outline" > 
                 <label class = "errors">Please fill out</label> 
             </div>
 
             <div>
-                <label>Number of Entities</label> 
-                <input type="text" id = "number-of-entities"> 
+                <label class="headings" >Number of Entities</label> 
+                <input type="number" min="0" max="20" class="green-outline" 
+                id="number-of-entities"> 
                 <div class = "errors" id = "number-of-entities-error">
                     <label >The max is 20</label> 
                     <label >Must be a positive number</label>
@@ -45,51 +46,31 @@
                 </div>
                 
             </div>
-
         </div>
 
-
-        <div id = "xy-values-container">
-
-            <div id = "add-remove">
-                <div id = "add">
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-        
-                <div id = "remove">
-                    <i class="fa-solid fa-minus"></i>
-                </div>
-            </div> 
-
-        </div>
-
-        
-        <p class = "errors final-error">The maximum number of entities is 20</p>
-        
-
+        <div id = "xy-values-container"></div>
+      
         <div id = "generate-graph">
              <button > Generate Graph</button>
         </div>
 
         <div  id = "graph-container">
             <div id = "title">
-                <h1>Title</h1>
+                <h1></h1>
             </div>
 
             <div id = "y-axis">
                 <div>
-                    <h2>Y-axis</h1>
+                    <h2></h2>
                 </div>
             </div>
 
             <div id = "graph"></div>
 
             <div id = "x-axis">
-
                 <div id = "x-components"></div>
-
                 <div id = "x-axis-name">
-                    <h2>X-axis</h1>
+                    <h2></h2>
                 </div>
             </div>
 
@@ -97,28 +78,22 @@
         </div>
 
         <template id = "template-xy-values">
-
             <div class = "xy-values">
-                    <input type="text" placeholder = "X-value" class = "x-value" ><br>
-                    <label class = "errors">Please fill out</label> <br>
-                    <input type="text" placeholder = "Y-value" class = "y-value"><br>
-                    <label class = "errors">Must be numeric</label> 
+                    <input type="text" placeholder = "X-value" class = "x-value green-outline">
+                    <label class = "errors">Please fill out</label> 
+                    <input type="text" placeholder = "Y-value" class = "y-value green-outline ">
+                    <label class = "errors">Must be greater than 0</label> 
             </div>
-
         </template>
         
         <template id = "template-bar">
-
              <div class = "bar">
                  <span class = "bar-value"></span>
              </div>
-
         </template>
  
         <template id = "template-x-component">
-            
              <div class = "x-component"></div>
-
         </template>
     
         
