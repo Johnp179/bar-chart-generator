@@ -46,14 +46,12 @@ numberOfEntities.addEventListener("input", function(){
         return
     } 
 
-    // errors[errors.length -1].style.display = "none";
     this.style.boxShadow = "none";
     this.classList.add("green-outline");
     numberOfEntitiesErrors[0].style.display = "none";
     numberOfEntitiesErrors[1].style.display = "none";
     numberOfEntitiesErrors[2].style.display = "none";
     generateGraph.style.display = "block";
-    // addRemove.style.display = "flex";
     xyValuesContainer.style.display = "flex";
     amountOfEntities = this.value;
 
@@ -71,45 +69,10 @@ numberOfEntities.addEventListener("input", function(){
         yError.style.visibility =  "hidden";
         xValue.style.boxShadow = "none";
         yValue.style.boxShadow = "none";
-        // xValue.value = "";
-        // yValue.value = "";
     }
   
 
 })
-
-// document.querySelector("#remove").addEventListener("click",()=>{
-
-//     if(amountOfEntities === 0) return;
-    
-//     amountOfEntities --;
-//     const xyValueToRemove = xyValues[amountOfEntities];
-//     const xValue = xyValueToRemove.querySelector(".x-value");
-//     const yValue = xyValueToRemove.querySelector(".y-value");
-//     const xError = xyValueToRemove.querySelectorAll(".errors")[0];
-//     const yError = xyValueToRemove.querySelectorAll(".errors")[1];
-
-//     errors[errors.length -1].style.display = "none";
-//     xyValueToRemove.style.display = "none";
-//     xError.style.visibility =  "hidden";
-//     yError.style.visibility =  "hidden";
-//     xValue.style.boxShadow = "none";
-//     yValue.style.boxShadow = "none";
-//     xValue.value = "";
-//     yValue.value = ""; 
-
-// });
-
-// document.querySelector("#add").addEventListener("click", ()=>{
-
-//     if(amountOfEntities < maxNumberOfEntities){
-//         xyValues[amountOfEntities].style.display = "block";
-//         amountOfEntities ++;
-//     }else{
-//         errors[errors.length -1].style.display = "block";
-//     }
-   
-// });
 
 
 const inputs = Array.from(document.querySelectorAll("input"));
